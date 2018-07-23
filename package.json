@@ -12,6 +12,7 @@
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-jsx-a11y": "^6.1.1",
+    "less": "^3.7.1",
     "socket.io": "^2.1.1",
     "vue": "^2.5.16",
     "vue-eslint-parser": "^3.1.1",
@@ -23,6 +24,7 @@
     "@vue/cli-service": "^3.0.0-rc.4",
     "eslint": "^5.2.0",
     "eslint-plugin-vue": "^4.7.0",
+    "less-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

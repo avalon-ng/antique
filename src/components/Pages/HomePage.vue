@@ -3,18 +3,26 @@
     <button v-on:click="login">Login</button>
     <input placeholder="name" />
     <Loading v-if="isLoading" />
+    <PopUp :containerClass="$style.popup">
+      <button :class="$style.close">
+        <img :src="closeImage" /> 
+      </button>
+    </PopUp>
   </div>
 </template>
 
 <script>
 import { getMethods } from 'socketHandler';
 import Loading from 'components/Loading';
+import IMAGE_CLOSE from 'assets/close.png';
+import PopUp from 'components/PopUp';
 const { connect } = getMethods();
 
 export default {
   name: 'HomePage',
   components: {
-    Loading
+    Loading,
+    PopUp
   },
   methods: {
     login: function() {
@@ -28,26 +36,33 @@ export default {
   },
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      closeImage: IMAGE_CLOSE
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style lang="less" module>
+.popup {
+  width: 350px;
+  height: 200px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.close {
+	outline: 0;
+	border: 0;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
+	display: block !important; // ios bug
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-right: 15px;
+  margin-top: 15px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
