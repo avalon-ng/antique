@@ -2,9 +2,13 @@ import io from 'socket.io-client';
 import getConfig from '../getConfig';
 const { SOCKET_URL } = getConfig();
 
-const connect = socket => () => new Promise((resolve) => {
+const connect = socket => (param) => new Promise((resolve) => {
+  const { name } = param;
   socket = io(SOCKET_URL);
-  socket.on('connect', () => resolve());
+  socket.on('connect', () => {
+    socket.emit('login', { name });
+  });
+  socket.on('login', resolve);
   // socket.on('message', () => {
   //   console.log('connect');
   //   socket.emit('test', 'ttt');

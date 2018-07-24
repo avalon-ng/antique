@@ -13,6 +13,7 @@ module.exports = {
       .set('styles',resolve('src/styles'))
       .set('components',resolve('src/components'))
       .set('socketHandler',resolve('src/socketHandler'))
+      .set('helpers',resolve('src/helpers'))
       .set('layout',resolve('src/layout'))
       .set('base',resolve('src/base'))
       .set('static',resolve('src/static'))

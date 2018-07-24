@@ -2,17 +2,22 @@
   <div>
     <button @click="login">Login</button>
     <input
-      :model="name"
+      v-model="name"
       placeholder="name"
     >
     <Loading v-if="isLoading" />
     <PopUp
       v-if="isPopUp"
       :container-class="$style.popup"
+      :on-click-outer="closePopUp"
     >
-      <button :class="$style.close">
+      <button
+        :class="$style.close"
+        @click="closePopUp"
+      >
         <img :src="closeImage"> 
       </button>
+      <div :class="$style.content">{{ popupMessage }}</div>
     </PopUp>
   </div>
 </template>
@@ -22,6 +27,7 @@ import { getMethods } from 'socketHandler';
 import Loading from 'components/Loading';
 import IMAGE_CLOSE from 'assets/close.png';
 import PopUp from 'components/PopUp';
+import { translate } from 'helpers';
 const { connect } = getMethods();
 
 export default {
@@ -35,16 +41,30 @@ export default {
       isLoading: false,
       isPopUp: false,
       closeImage: IMAGE_CLOSE,
-      name
+      name,
+      popupMessage: ''
     };
   },
   methods: {
+    closePopUp: function() {
+      this.popupMessage = '';
+      this.isPopUp = false;
+    },
     login: function () {
+      const param = {
+        name: this.name
+      };
       this.isLoading = true;
-      connect()
-        .then(() => {
+      connect(param)
+        .then((data) => {
           this.isLoading = false;
-          this.$router.push({ path: 'lobby' });
+          const { result, message } = data;
+          if(result) {
+            this.$router.push({ path: 'lobby' });
+          } else {
+            this.isPopUp = true;
+            this.popupMessage = translate({ type: 'login', message });
+          }
         });
     }
   }
@@ -52,9 +72,18 @@ export default {
 </script>
 
 <style lang="less" module>
+.content {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 .popup {
   width: 350px;
-  height: 200px;
+  height: auto;
 }
 .close {
 	outline: 0;
@@ -63,8 +92,8 @@ export default {
 	background: transparent;
 	cursor: pointer;
 	display: block !important; // ios bug
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   float: right;
   margin-right: 15px;
   margin-top: 15px;
