@@ -5,7 +5,7 @@
     <div
       :class="[containerClass, $style.container]"
     >
-      <slot></slot>
+      <slot/>
     </div>
   </div>
 </template>
@@ -14,12 +14,17 @@
 
 export default {
   props: {
-    containerClass: {
+    'container-class': {
       type: String,
       default: ''
     }
-  }
-}
+  },
+	data: function() {
+		return {
+			containerClass: this['container-class']
+		};
+	}
+};
 </script>
 
 <style lang="less" module>

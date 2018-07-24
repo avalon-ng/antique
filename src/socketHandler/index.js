@@ -1,5 +1,5 @@
 import connect from './connect';
-import createRoom from './createRoom';
+// import createRoom from './createRoom';
 
 let socket = {};
 let methods = {
@@ -8,10 +8,10 @@ let methods = {
 
 Object.keys(methods).forEach(key => {
   const originFn = methods[key];
-  methods[key] = (param) => {
+  methods[key] = param => {
     return originFn(socket)(param);
-  }
-})
+  };
+});
 
 const getMethods = () => methods;
 

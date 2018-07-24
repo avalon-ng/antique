@@ -3,5 +3,5 @@ const getConfig = () => {
     SOCKET_URL: '/'
   };
   return config;
-}
+};
 export default getConfig;

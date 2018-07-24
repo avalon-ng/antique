@@ -9,16 +9,14 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/', component: HomePage },
   { path: '/lobby', component: LobbyPage }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
-  base: __dirname,
   routes
 });
 
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
-
+}).$mount('#app');

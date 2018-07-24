@@ -1,8 +1,13 @@
 <template>
-  <div v-if="isInner" class="className">
+  <div
+    v-if="isInner"
+  >
     <div class="spinner" />
   </div>
-  <div v-else class="loading">
+  <div
+    v-else
+    class="loading"
+  >
     <div class="spinner" />
   </div>
 </template>
@@ -10,14 +15,17 @@
 <script>
 export default {
   props: {
-    type: String
+    type: {
+      type: String,
+      default: ''
+    }
   },
-  data: function() {
+  data: function () {
     return {
       isInner: this.type === 'inner'
-    }
+    };
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

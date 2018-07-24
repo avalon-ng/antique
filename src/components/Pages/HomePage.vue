@@ -1,11 +1,17 @@
 <template>
   <div>
-    <button v-on:click="login">Login</button>
-    <input placeholder="name" />
+    <button @click="login">Login</button>
+    <input
+      :model="name"
+      placeholder="name"
+    >
     <Loading v-if="isLoading" />
-    <PopUp :containerClass="$style.popup">
+    <PopUp
+      v-if="isPopUp"
+      :container-class="$style.popup"
+    >
       <button :class="$style.close">
-        <img :src="closeImage" /> 
+        <img :src="closeImage"> 
       </button>
     </PopUp>
   </div>
@@ -24,8 +30,16 @@ export default {
     Loading,
     PopUp
   },
+  data() {
+    return {
+      isLoading: false,
+      isPopUp: false,
+      closeImage: IMAGE_CLOSE,
+      name
+    };
+  },
   methods: {
-    login: function() {
+    login: function () {
       this.isLoading = true;
       connect()
         .then(() => {
@@ -33,14 +47,8 @@ export default {
           this.$router.push({ path: 'lobby' });
         });
     }
-  },
-  data() {
-    return {
-      isLoading: false,
-      closeImage: IMAGE_CLOSE
-    }
   }
-}
+};
 </script>
 
 <style lang="less" module>

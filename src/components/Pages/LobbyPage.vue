@@ -1,26 +1,23 @@
 <template>
   <div>
-    <button v-on:click="createRoom">create</button>
-    <button v-on:click="joinRoom">join</button>
-    <input placeholder="room number" />
+    <button @click="createRoom">create</button>
+    <button @click="joinRoom">join</button>
+    <input placeholder="room number">
   </div>
 </template>
 
 <script>
 export default {
   name: 'LobbyPage',
-  props: {
-    msg: String
-  },
   methods: {
     createRoom: () => {
-      console.log(123);
+      // console.log(123);
     },
     joinRoom: () => {
 
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
