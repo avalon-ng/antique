@@ -9,7 +9,7 @@
     <PopUp
       v-if="isPopUp"
       :container-class="$style.popup"
-      :on-click-outer="closePopUp"
+      :close-pop-up="closePopUp"
     >
       <button
         :class="$style.close"

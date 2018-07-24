@@ -1,7 +1,7 @@
 <template>
   <div
     :class="$style.popup"
-    @click="closePopUp"
+    @click="clickOuter"
   >
     <div
       :class="[containerClass, $style.container]"
@@ -19,14 +19,16 @@ export default {
       type: String,
       default: ''
     },
-    'on-click-outer': {
+    'close-pop-up': {
       type: Function,
       required: true
     }
   },
   methods: {
-    closePopUp: function() {
-      this.onClickOuter();
+    clickOuter: function(e) {
+      if (this.$el && e.target === this.$el) {
+        this.closePopUp();
+      }
     }
   }
 };
