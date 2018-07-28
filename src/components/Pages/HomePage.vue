@@ -23,12 +23,11 @@
 </template>
 
 <script>
-import { getMethods } from 'socketHandler';
+import { connect } from 'socketHandler';
 import Loading from 'components/Loading';
 import IMAGE_CLOSE from 'assets/close.png';
 import PopUp from 'components/PopUp';
 import { translate } from 'helpers';
-const { connect } = getMethods();
 
 export default {
   name: 'HomePage',

@@ -11,6 +11,7 @@ module.exports = {
       .set('@$', resolve('src'))
       .set('assets',resolve('src/assets'))
       .set('styles',resolve('src/styles'))
+      .set('store',resolve('src/store'))
       .set('components',resolve('src/components'))
       .set('socketHandler',resolve('src/socketHandler'))
       .set('helpers',resolve('src/helpers'))
