@@ -1,8 +1,9 @@
 import connect from './connect';
 import getSocketStatus from './getSocketStatus';
-// import createRoom from './createRoom';
+import createRoom from './createRoom';
 
 export {
   connect,
-  getSocketStatus
+  getSocketStatus,
+  createRoom
 };

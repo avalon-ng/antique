@@ -8,6 +8,7 @@
 
 <script>
 import Page from 'components/Pages/Page';
+import { createRoom, joinRoom } from 'socketHandler';
 export default {
   name: 'LobbyPage',
   components: {
@@ -15,10 +16,14 @@ export default {
   },
   methods: {
     createRoom: () => {
-      // console.log(123);
+      createRoom()
+        .then(({ result, data }) => {
+          const { number } = data;
+          console.log(number);
+        });
     },
     joinRoom: () => {
-
+      joinRoom();
     }
   }
 };

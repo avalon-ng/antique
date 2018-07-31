@@ -14,16 +14,11 @@ const mutations = {
 };
 
 const actions = {
-  connect: ({ commit }, socket) => commit('connect', socket)
-};
-
-const getters = {
-  getSocket: state => state.socket
+  connect: ({ commit }, { socket }) => commit('connect', socket)
 };
 
 export default new Vuex.Store({
   state,
-  getters,
   actions,
   mutations
 });
