@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Page>
     <button @click="login">Login</button>
     <input
       v-model="name"
@@ -19,10 +19,11 @@
       </button>
       <div :class="$style.content">{{ popupMessage }}</div>
     </PopUp>
-  </div>
+  </Page>
 </template>
 
 <script>
+import Page from 'components/Pages/Page';
 import { connect } from 'socketHandler';
 import Loading from 'components/Loading';
 import IMAGE_CLOSE from 'assets/close.png';
@@ -33,7 +34,8 @@ export default {
   name: 'HomePage',
   components: {
     Loading,
-    PopUp
+    PopUp,
+    Page
   },
   data() {
     return {
