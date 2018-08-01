@@ -1,9 +1,9 @@
 import store from 'store';
 
-const createRoom = () => new Promise((resolve) => {
+const createRoom = ({ password }) => new Promise((resolve) => {
   const socket = store.state.socket;
   socket.on('createRoom', resolve);
-  socket.emit('createRoom');
+  socket.emit('createRoom', { password });
 });
 
 

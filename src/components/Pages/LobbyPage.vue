@@ -1,29 +1,73 @@
 <template>
-  <Page>
+  <Page ref="page">
     <button @click="createRoom">create</button>
     <button @click="joinRoom">join</button>
-    <input placeholder="room number">
+    <input
+      v-model="number"
+      placeholder="room number"
+    >
+    <input
+      v-model="password"
+      placeholder="room password"
+    >
   </Page>
 </template>
 
 <script>
 import Page from 'components/Pages/Page';
 import { createRoom, joinRoom } from 'socketHandler';
+import { translate } from 'helpers';
 export default {
   name: 'LobbyPage',
   components: {
     Page
   },
+  data() {
+    return {
+      number: '',
+      password: ''
+    };
+  },
   methods: {
-    createRoom: () => {
-      createRoom()
-        .then(({ result, data }) => {
+    createRoom: function() {
+      const { page } = this.$refs;
+      const { password } = this;
+      page.startLoading();
+      createRoom({ password })
+        .then(({ result, data, message }) => {
+          page.endLoading();
+          if (!result) {
+            page.openPopUp(translate({ type: 'createRoom', message }));
+            return;
+          }
+          
           const { number } = data;
-          console.log(number);
+          this.$router.push({ path: `room/${number}` });
+        })
+        .catch((e) => {
+          page.endLoading();
+          page.openPopUp(e.message);
         });
     },
-    joinRoom: () => {
-      joinRoom();
+    joinRoom: function() {
+      const { page } = this.$refs;
+      const { password, number } = this;
+      page.startLoading();
+      joinRoom({ number, password })
+        .then(({ result, data, message }) => {
+          page.endLoading();
+          if (!result) {
+            page.openPopUp(translate({ type: 'joinRoom', message }));
+            return;
+          }
+          
+          const { number } = data;
+          this.$router.push({ path: `room/${number}` });
+        })
+        .catch((e) => {
+          page.endLoading();
+          page.openPopUp(e.message);
+        });
     }
   }
 };
