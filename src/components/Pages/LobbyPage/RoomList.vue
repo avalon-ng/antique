@@ -17,7 +17,9 @@
         <div>{{ room.users }}</div>
         <div>{{ room.players }}</div>
       </div>
+      <div>{{ translate({ message:room.status, type: 'roomStatus' }) }}</div>
       <button
+        v-if="room.status === 'waiting'"
         @click="joinRoom({ number: room.number, password: passwords[room.number] })"
       >
         <span>進入</span>
@@ -40,7 +42,8 @@ export default {
   data: function() {
     return {
       rooms: [],
-      passwords: {}
+      passwords: {},
+      translate
     };
   },
   created: function() {
