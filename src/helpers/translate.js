@@ -15,6 +15,11 @@ const MESSAGES = {
   roomStatus: {
     waiting: '等待中',
     playing: '遊戲中'
+  },
+  userStatus: {
+    lobby: '大廳',
+    waiting: '等待中',
+    playing: '遊戲中'
   }
 };
 

@@ -11,19 +11,22 @@
       placeholder="room password"
     >
     <RoomList :join-room="joinRoom"/>
+    <UserList />
   </Page>
 </template>
 
 <script>
 import Page from 'components/Pages/Page';
 import RoomList from './RoomList';
+import UserList from './UserList';
 import { createRoom, joinRoom, updateRoomStatus } from 'socketHandler';
 import { translate } from 'helpers';
 export default {
   name: 'LobbyPage',
   components: {
     Page,
-    RoomList
+    RoomList,
+    UserList
   },
   data() {
     return {

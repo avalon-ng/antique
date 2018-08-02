@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.rooms">
     <div
       v-for="room in rooms"
       :key="room.number"
@@ -63,6 +63,11 @@ export default {
 </script>
 
 <style lang="less" module>
+.rooms {
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 10px;
+}
 .room {
   border: 1px solid black;
   border-radius: 5px;
