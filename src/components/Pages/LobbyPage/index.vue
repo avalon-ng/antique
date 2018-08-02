@@ -1,7 +1,7 @@
 <template>
   <Page ref="page">
     <button @click="createRoom">create</button>
-    <button @click="joinRoom">join</button>
+    <button @click="joinRoom({ number, password })">join</button>
     <input
       v-model="number"
       placeholder="room number"
@@ -10,17 +10,20 @@
       v-model="password"
       placeholder="room password"
     >
+    <RoomList :join-room="joinRoom"/>
   </Page>
 </template>
 
 <script>
 import Page from 'components/Pages/Page';
-import { createRoom, joinRoom } from 'socketHandler';
+import RoomList from './RoomList';
+import { createRoom, joinRoom, updateRoomStatus } from 'socketHandler';
 import { translate } from 'helpers';
 export default {
   name: 'LobbyPage',
   components: {
-    Page
+    Page,
+    RoomList
   },
   data() {
     return {
@@ -41,6 +44,7 @@ export default {
             return;
           }
           
+          updateRoomStatus();
           const { number } = data;
           this.$router.push({ path: `room/${number}` });
         })
@@ -49,9 +53,8 @@ export default {
           page.openPopUp(e.message);
         });
     },
-    joinRoom: function() {
+    joinRoom: function({ number, password }) {
       const { page } = this.$refs;
-      const { password, number } = this;
       page.startLoading();
       joinRoom({ number, password })
         .then(({ result, data, message }) => {
@@ -61,6 +64,7 @@ export default {
             return;
           }
           
+          updateRoomStatus();
           const { number } = data;
           this.$router.push({ path: `room/${number}` });
         })

@@ -11,6 +11,10 @@ const MESSAGES = {
     Password: '密碼錯誤',
     Playing: '遊戲進行中',
     Amount: '人數超過限制'
+  },
+  roomStatus: {
+    waiting: '等待中',
+    playing: '遊戲中'
   }
 };
 

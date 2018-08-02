@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomePage from 'components/Pages/HomePage.vue';
-import LobbyPage from 'components/Pages/LobbyPage.vue';
+import HomePage from 'components/Pages/HomePage';
+import LobbyPage from 'components/Pages/LobbyPage';
 import store from 'store';
 import App from './App.vue';
 

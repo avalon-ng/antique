@@ -9,7 +9,7 @@ const connect = (param) => new Promise((resolve) => {
   socket.on('connect', () => {
     socket.emit('login', { name });
   });
-  socket.on('login', (data) => {
+  socket.once('login', (data) => {
     const { result } = data;
     if (result) {
       store.dispatch('connect', { socket });
