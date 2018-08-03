@@ -37,27 +37,17 @@ export default {
     joinRoom: {
       type: Function,
       required: true,
+    },
+    rooms: {
+      type: Array,
+      required: true
     }
   },
   data: function() {
     return {
-      rooms: [],
       passwords: {},
       translate
     };
-  },
-  created: function() {
-    this.updateRoomStatus();
-  },
-  methods: {
-    updateRoomStatus: function() {
-      updateRoomStatus({ onEvent: this.getRoomsStatus });
-    },
-    getRoomsStatus: function({ result, data, message }) {
-      if (result) {
-        this.rooms = data.rooms;
-      }
-    }
   }
 };
 </script>

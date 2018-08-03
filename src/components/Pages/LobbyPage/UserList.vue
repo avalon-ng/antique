@@ -6,35 +6,31 @@
       :class="$style.user"
     >
       <div>{{ user.name }}</div>
-      <div :class="$style.number" v-if="user.number !== 'lobby'">{{ user.number }}</div>
+      <div
+        v-if="user.number !== 'lobby'"
+        :class="$style.number"
+      >
+        {{ user.number }}
+      </div>
       <div :class="$style.status">{{ translate({ type: 'userStatus', message: user.status }) }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import { updateUserStatus } from 'socketHandler';
 import { translate } from 'helpers';
 export default {
   name: 'UserList',
+  props: {
+    users: {
+      type: Array,
+      required: true
+    }
+  },
   data: function() {
     return {
-      users: [],
       translate
     };
-  },
-  created: function() {
-    this.updateUserStatus();
-  },
-  methods: {
-    updateUserStatus: function() {
-      updateUserStatus({ onEvent: this.getUsersStatus });
-    },
-    getUsersStatus: function({ result, data, message }) {
-      if (result) {
-        this.users = data.users;
-      }
-    }
   }
 };
 </script>

@@ -10,8 +10,13 @@
       v-model="password"
       placeholder="room password"
     >
-    <RoomList :join-room="joinRoom"/>
-    <UserList />
+    <RoomList
+      :join-room="joinRoom"
+      :rooms="rooms"
+    />
+    <UserList
+      :users="users"
+    />
   </Page>
 </template>
 
@@ -19,7 +24,7 @@
 import Page from 'components/Pages/Page';
 import RoomList from './RoomList';
 import UserList from './UserList';
-import { createRoom, joinRoom, updateRoomStatus } from 'socketHandler';
+import { createRoom, joinRoom, updateLobbyStatus } from 'socketHandler';
 import { translate } from 'helpers';
 export default {
   name: 'LobbyPage',
@@ -31,8 +36,13 @@ export default {
   data() {
     return {
       number: '',
-      password: ''
+      password: '',
+      rooms: [],
+      users: []
     };
+  },
+  created: function() {
+    this.updateLobbyStatus();
   },
   methods: {
     createRoom: function() {
@@ -47,7 +57,7 @@ export default {
             return;
           }
           
-          updateRoomStatus();
+          updateLobbyStatus();
           const { number } = data;
           this.$router.push({ path: `room/${number}` });
         })
@@ -67,7 +77,7 @@ export default {
             return;
           }
           
-          updateRoomStatus();
+          updateLobbyStatus();
           const { number } = data;
           this.$router.push({ path: `room/${number}` });
         })
@@ -75,6 +85,15 @@ export default {
           page.endLoading();
           page.openPopUp(e.message);
         });
+    },
+    updateLobbyStatus: function() {
+      updateLobbyStatus({ onEvent: this.getLobbyStatus });
+    },
+    getLobbyStatus: function({ result, data, message }) {
+      if (result) {
+        this.rooms = data.rooms;
+        this.users = data.users;
+      }
     }
   }
 };
