@@ -17,32 +17,52 @@
     <UserList
       :users="users"
     />
+    <Messages
+      :messages="messages"
+    >
+      <input
+        v-model="message"
+        placeholder="輸入你想說的話"        
+      >
+      <button @click="sendMessage({ content: message })">送出</button>
+    </Messages>
   </Page>
 </template>
 
 <script>
 import Page from 'components/Pages/Page';
+import Messages from 'components/Messages';
 import RoomList from './RoomList';
 import UserList from './UserList';
-import { createRoom, joinRoom, updateLobbyStatus } from 'socketHandler';
 import { translate } from 'helpers';
+import {
+  createRoom,
+  joinRoom,
+  updateLobbyStatus,
+  sendMessage,
+  updateMessages
+} from 'socketHandler';
 export default {
   name: 'LobbyPage',
   components: {
     Page,
     RoomList,
-    UserList
+    UserList,
+    Messages
   },
   data() {
     return {
       number: '',
       password: '',
       rooms: [],
-      users: []
+      users: [],
+      message: '',
+      messages: []
     };
   },
   created: function() {
     this.updateLobbyStatus();
+    this.updateMessages();
   },
   methods: {
     createRoom: function() {
@@ -94,7 +114,18 @@ export default {
         this.rooms = data.rooms;
         this.users = data.users;
       }
-    }
+    },
+    updateMessages: function() {
+      updateMessages({ onEvent: this.getMessages });
+    },
+    sendMessage: function({ content }) {
+      sendMessage({ content });
+    },
+    getMessages: function({ result, data }) {
+      if (result) {
+        this.messages = data.messages;
+      }
+    },
   }
 };
 </script>

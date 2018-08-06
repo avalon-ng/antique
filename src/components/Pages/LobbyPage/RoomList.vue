@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { updateRoomStatus } from 'socketHandler';
 import { translate } from 'helpers';
 export default {
   name: 'RoomList',

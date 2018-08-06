@@ -5,6 +5,8 @@ import joinRoom from './joinRoom';
 import updateRoomStatus from './updateRoomStatus';
 import updateUserStatus from './updateUserStatus';
 import updateLobbyStatus from './updateLobbyStatus';
+import sendMessage from './sendMessage';
+import updateMessages from './updateMessages';
 
 export {
   connect,
@@ -13,5 +15,7 @@ export {
   joinRoom,
   updateRoomStatus,
   updateUserStatus,
-  updateLobbyStatus
+  updateLobbyStatus,
+  sendMessage,
+  updateMessages
 };
