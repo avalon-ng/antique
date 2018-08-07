@@ -2,6 +2,7 @@ import connect from './connect';
 import getSocketStatus from './getSocketStatus';
 import createRoom from './createRoom';
 import joinRoom from './joinRoom';
+import leaveRoom from './leaveRoom';
 import updateRoomStatus from './updateRoomStatus';
 import updateUserStatus from './updateUserStatus';
 import updateLobbyStatus from './updateLobbyStatus';
@@ -17,5 +18,6 @@ export {
   updateUserStatus,
   updateLobbyStatus,
   sendMessage,
-  updateMessages
+  updateMessages,
+  leaveRoom
 };
