@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="[$style.page, propsClass]">
     <slot />
     <Loading v-if="isLoading" />
     <PopUp
@@ -30,12 +30,13 @@ export default {
     Loading,
     PopUp
   },
-  data: () => {
+  data: function() {
     return {
       isLoading: false,
       isPopUp: false,
       closeImage: IMAGE_CLOSE,
-      popupMessage: ''
+      popupMessage: '',
+      propsClass: this.class || ''
     };
   },
   created: function() {
@@ -65,6 +66,12 @@ export default {
 
 
 <style lang="less" module>
+.page {
+  background-color: #fcfcfc;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
 .content {
   margin-top: 30px;
   margin-bottom: 30px;
