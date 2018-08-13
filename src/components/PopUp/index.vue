@@ -83,8 +83,9 @@ export default {
   .container {
     width: 650px;
     height: 510px;
-    border-radius: 17px; 
-    background-color: #F2F2F2; 
+    border-radius: 0.2em; 
+    background-color: #fcfcfc; 
+    box-shadow: 0 0 2em 0.2em rgba(0,0,0,0.3);
   }
   .content-container {
     height: 330px;
@@ -92,7 +93,7 @@ export default {
     margin-left: 68px;
     margin-right: 68px;
     width: calc(100% - 68px * 2);
-    background-color: #FFFFFF;
+    background-color: #fcfcfc;
   }
   .content {
     padding: 17px;
@@ -145,12 +146,13 @@ export default {
     margin-right: 5%;
     width: 90%;
     height: 510px;
-    border-radius: 17px; 
-    background-color: #F2F2F2; 
+    border-radius: 0.2em;
+    background-color: #fcfcfc; 
+    box-shadow: 0 0 2em 0.2em rgba(0,0,0,0.3);
   }
   .content {
     overflow-y: scroll;
-    background-color: #FFFFFF; 
+    background-color: #fcfcfc; 
     margin-top: 20px;
     margin-left: calc(17px + 5%);
     width: calc(100% - 17px * 2 - 5% * 2 - 17px * 2 );

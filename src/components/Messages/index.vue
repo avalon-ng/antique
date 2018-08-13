@@ -30,6 +30,7 @@ export default {
   border-radius: 5px;
   border: 1px solid black;
   padding: 10px;
+  height: 200px;
 }
 .message {
   display: flex;

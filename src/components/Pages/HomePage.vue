@@ -6,7 +6,7 @@
     <div :class="$style.login">
       <input
         v-model="name"
-        placeholder="name"
+        placeholder="Name"
       >
       <button @click="login">Login</button>
     </div>
@@ -42,7 +42,7 @@ export default {
           if(result) {
             this.$router.push({ path: 'lobby' });
           } else {
-            page.openPopUp(translate({ type: 'login', message }));
+            page.openPopUp({ message: translate({ type: 'login', message }) });
           }
         });
     }

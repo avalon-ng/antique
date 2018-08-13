@@ -11,9 +11,20 @@
         :class="$style.close"
         @click="closePopUp"
       >
-        <img :src="closeImage"> 
+        ×
       </button>
-      <div :class="$style.content">{{ popupMessage }}</div>
+      <div
+        v-if="popupComponent"
+        :class="$style.content"
+      >
+        <slot name="popup" />
+      </div>
+      <div
+        v-else
+        :class="$style.content"
+      >
+        {{ popupMessage }}
+      </div>
     </PopUp>
   </div>
 </template>
@@ -36,7 +47,8 @@ export default {
       isPopUp: false,
       closeImage: IMAGE_CLOSE,
       popupMessage: '',
-      propsClass: this.class || ''
+      popupComponent: false,
+      propsClass: this.class
     };
   },
   created: function() {
@@ -50,8 +62,14 @@ export default {
       this.popupMessage = '';
       this.isPopUp = false;
     },
-    openPopUp: function(message) {
-      this.popupMessage = message;
+    openPopUp: function({ message, component }) {
+      if (message) {
+        this.popupComponent = false;
+        this.popupMessage = message;
+      } else if (component) {
+        this.popupComponent = true;
+        this.popupMessage = '';
+      }
       this.isPopUp = true;
     },
     startLoading: function() {
@@ -70,7 +88,6 @@ export default {
   background-color: #fcfcfc;
   width: 100%;
   height: 100%;
-  display: flex;
 }
 .content {
   margin-top: 30px;
@@ -86,21 +103,22 @@ export default {
   height: auto;
 }
 .close {
-	outline: 0;
-	border: 0;
-	padding: 0;
-	background: transparent;
-	cursor: pointer;
+	outline: 0 !important;
+	border: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	cursor: pointer !important;
 	display: block !important; // ios bug
-  width: 20px;
-  height: 20px;
-  float: right;
-  margin-right: 15px;
-  margin-top: 15px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
+  width: 20px !important;
+  height: 20px !important;
+  float: right !important;
+  margin-right: 15px !important;
+  margin-top: 10px !important;
+  font-size: 30px !important;
+  font-weight: bold !important;
+  color: black !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 </style>
 
